@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'me.verwelius'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.kohsuke:github-api:1.308'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'me.verwelius.ghjumper.Starter'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
